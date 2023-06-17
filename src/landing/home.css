@@ -1,5 +1,5 @@
 .careheader_container {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://images.unsplash.com/photo-1592392513912-fd639ff32e98?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTAwfHxtZWRpY2FsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60);
+   background: url(../photos/background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -15,7 +15,7 @@
 
 .careheader_heading,
 .heading_para {
-    color: #fff;
+    color: #441673;
 }
 
 .careheader_heading {
@@ -63,13 +63,20 @@
 
 .careheader_item {
     color: #fff;
-    background-color: rgb(69, 143, 143);
-    opacity: 0.6;
+    background-color: #441673;
     padding: 8px 12px;
     text-align: center;
     border-radius: 10px;
     width: 100%;
     cursor: pointer;
+}
+
+.careheader_item:hover{
+    background-color: rgb(147, 98, 147);
+   
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+
 }
 
 .careheader_select_icon {
@@ -78,11 +85,17 @@
 
 }
 
-.careheader_item:hover {
-    background-color: #fff;
-    color: #000;
-    cursor: pointer;
-    transition: ease-in-out 0.3s;
+
+
+.carephoto{
+    
+position: absolute;
+width: 816px;
+height: 603px;
+right: 624px;
+top: 210px;
+filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(12px 12px 20px rgba(14, 61, 183, 0.25));
+border-radius: 50px 0px 0px 50px;
 }
 
 @media screen and (max-width:991px) {

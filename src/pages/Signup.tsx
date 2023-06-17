@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -6,15 +6,17 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase";
-import "./signin.css";
-import { FaGoogle } from "react-icons/fa";
+import "./signup.css";
 import { useNavigate } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 
 const RegistrationForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [registered, setRegistered] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -22,10 +24,9 @@ const RegistrationForm = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      // Perform registration logic
       console.log("Registration successful");
       setRegistered(true);
-      navigate("/hospitals"); // Navigate to the "/hospitals" route
+      navigate("/hospitals");
     } catch (error) {
       console.log("Registration failed:", error);
     }
@@ -33,15 +34,15 @@ const RegistrationForm = () => {
 
   const handleGoogleSignUp = async () => {
     const provider = new GoogleAuthProvider();
+    provider.addScope("profile");
+    provider.addScope("email");
 
     try {
       await signInWithPopup(auth, provider);
-      // Perform registration logic
-      console.log("Google sign-up successful");
+      console.log("Google sign up successful");
       setRegistered(true);
-      navigate("/hospitals"); // Navigate to the "/hospitals" route
     } catch (error) {
-      console.log("Google sign-up failed:", error);
+      console.log("Google sign up failed:", error);
     }
   };
 
@@ -57,14 +58,15 @@ const RegistrationForm = () => {
 
   return (
     <div className="registration-form-wrapper">
-      {registered ? (
-        <div>
-          <h1>Welcome, {name}!</h1>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      ) : (
-        <div className="registration-form">
-          <h2>Registration Form</h2>
+      <div className="registration-form">
+        <h1>Registration</h1>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {registered ? (
+          <div>
+            <h1>Welcome, {name || ""}!</h1>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        ) : (
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="name">Name:</label>
@@ -75,6 +77,7 @@ const RegistrationForm = () => {
                 onChange={(e) => setName(e.target.value)}
                 required
               />
+              {name.length < 3 && <p>Name must be at least 3 characters</p>}
             </div>
             <div className="form-group">
               <label htmlFor="email">Email:</label>
@@ -85,6 +88,7 @@ const RegistrationForm = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
+              {email.length < 3 && <p>Email must be at least 3 characters</p>}
             </div>
             <div className="form-group">
               <label htmlFor="password">Password:</label>
@@ -95,16 +99,42 @@ const RegistrationForm = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              {password.length < 6 && (
+                <p>Password must be at least 6 characters</p>
+              )}
             </div>
-            <button onClick={() => navigate("/hospitals")} type="submit">Register</button>
-
-            <button onClick={handleGoogleSignUp}>
-              <FaGoogle />
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                required
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              {confirmPassword !== password && <p>Passwords must match</p>}
+            </div>
+            <button
+              onClick={handleSubmit}
+              className="signup-methods"
+              type="submit"
+            >
+              Register
             </button>
           </form>
-          <button onClick={() => navigate("/signin")}>Login</button>
-        </div>
-      )}
+        )}
+        {!registered && (
+          <div className="signup-methods">
+            <button onClick={handleGoogleSignUp}>Sign up with Google</button>
+          </div>
+        )}
+
+        {!registered && (
+          <p onClick={() => navigate("/signin")} className="linkback">
+            Already have an account? Login
+          </p>
+        )}
+      </div>
     </div>
   );
 };

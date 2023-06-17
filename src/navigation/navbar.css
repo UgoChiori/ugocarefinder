@@ -1,5 +1,5 @@
 a {
-    color: white;
+    color: #ffff;
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 500;
@@ -8,12 +8,12 @@ a {
     transition: all 0.3s ease-in-out;
     padding: 10px 20px;
     margin-right: 20px;
-    
-    
+
+
 }
 
 a:hover {
-    color: rgb(142, 237, 237);
+
     text-decoration: underline;
     font-size: 1.5rem;
 
@@ -27,9 +27,10 @@ a:hover {
     position: fixed;
     width: 100%;
     color: #fff;
+    background: #441673;
     z-index: 100;
-    /* border: 1px solid rgb(142, 237, 237); */
-    
+
+
 }
 
 .nav_header {
@@ -48,7 +49,7 @@ a:hover {
     width: 100%;
     color: #fff;
     z-index: 100;
-    background-color: rgb(142, 237, 237);
+    background-color: #916bb6;
     opacity: 0.6;
 }
 
@@ -57,7 +58,7 @@ a:hover {
     justify-content: space-between;
     align-items: right;
     width: 100%;
-    
+
 
 }
 
@@ -99,7 +100,7 @@ a:hover {
 @media screen and (max-width:991px) {
     .nav_icons {
         display: block;
-     }
+    }
 
     .nav_container1 {
         opacity: 1;
@@ -108,7 +109,7 @@ a:hover {
     .nav_ul {
         position: absolute;
         top: calc(100%);
-        background-color: rgb(17, 155, 155);
+        background-color: #441673;
         width: 100%;
         text-align: center;
         height: 100vh;
@@ -145,15 +146,17 @@ a:hover {
         font-size: 35px;
 
     }
+
     a {
-        
+
         font-size: 1rem;
         text-decoration: none;
         color: white;
         transition: none;
-        }
-        a:hover {
-            text-transform: none;
-        }
+    }
+
+    a:hover {
+        text-transform: none;
+    }
 
 }

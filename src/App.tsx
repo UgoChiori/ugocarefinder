@@ -7,9 +7,12 @@ import Hospitals from "./hospital/Hospitals";
 import { ErrorFallback } from "./components/Errorboundary/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import { AuthContext } from "./context/AuthContext";
+import HospitalDetails from "./hospital/HospitalDetails";
+import HealthTips from "./pages/HealthTips";
 
 import { auth, signOut, signInWithGoogle } from "./firebase";
 import Navbar from "./navigation/Navbar";
+import Doctors from "./pages/Doctors";
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
@@ -22,9 +25,15 @@ function App() {
   }
   localStorage.setItem("page_views", count);
 
-  // Google Signup
+  // Google Signin
   const signIn = () => {
     signInWithGoogle();
+  };
+
+  // Google signup
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const signUp = () => {
+    signUp();
   };
 
   // Google Signout
@@ -50,8 +59,21 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<Signin signIn={signIn} />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup />} />;
           <Route path="/hospitals" element={<Hospitals />} />
+          <Route
+            path="/hospitaldetails"
+            element={
+              <HospitalDetails
+                name={""}
+                status={""}
+                userRatings={""}
+                rating={""}
+              />
+            }
+          />
+          <Route path="/doctors" element={<Doctors />} />
+          <Route path="/healthtips" element={<HealthTips />} />
         </Routes>
       </ErrorBoundary>
     </div>

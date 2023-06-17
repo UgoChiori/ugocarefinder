@@ -1,5 +1,5 @@
 .container {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://images.unsplash.com/photo-1592392513912-fd639ff32e98?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTAwfHxtZWRpY2FsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60);
+   background: url(../photos/background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     height: 50vh;
@@ -27,7 +27,7 @@
 }
 
 .hospital-cover {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://images.unsplash.com/photo-1592392513912-fd639ff32e98?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTAwfHxtZWRpY2FsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60);
+    background: url(../photos/carefinder1.jpg);
     /* background-size: contain; */
     background-repeat: no-repeat;
     width: 100%;
@@ -75,7 +75,7 @@
 
 .hospital_card {
 
-    background-color: #fff;
+    background-color: gray;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 1rem;
@@ -87,6 +87,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
 }
 
 .hospital_card:hover {
