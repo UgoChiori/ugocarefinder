@@ -6,6 +6,7 @@ import {  MdLogout } from "react-icons/md";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { RxAvatar } from "react-icons/rx";
 import "./navbar.css";
+import carefinderlogo from "../photos/carefinderlogo.jpeg";
 
 interface User {
   displayName: string;
@@ -42,7 +43,8 @@ const Navbar: React.FC<NavbarProps> = ({ signOut, user }) => {
   return (
     <nav className={offset > 20 ? "nav_container1" : "nav_container"}>
       <div className="nav_wrapper">
-        <h1 className="nav_header">CareFinder.</h1>
+        <h1 className="nav_header">CareFinder. <img src={carefinderlogo} alt="logo" className="carefinderlogo" width={40} style={{background: "purple"}} /> </h1>
+        
         
         <div className={`nav_ul ${open ? "active" : ""}`}>
           <ul>

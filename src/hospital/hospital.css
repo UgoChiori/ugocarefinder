@@ -1,24 +1,45 @@
 .container {
-   background: url(../photos/background.jpg);
+    background: url(../photos/background.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
-    height: 50vh;
+    /* background-repeat: no-repeat; */
+    height: 30vh;
     display: grid;
     place-items: center;
 
 }
-.careheader_input {
-    position: relative;
+
+body{
+    background: url(../photos/background.jpg);
 }
+
+.carousel{
+    /* width: 100%; */
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #441673
+}
+
+#careheader_input {
+    position: relative;
+    width: 40%;
+    margin-top: 30px;
+
+}
+
 .careheader_input_icon {
     position: absolute;
-    right: 45px;
+    right: 20px;
     font-size: 1.5rem;
-    top: 15px;
+    top: 10px;
     cursor: pointer;
 }
 
-.careheader_input_element{
+.careheader_input_element {
     padding: 10px 20px;
     outline: none;
     border: none;
@@ -27,8 +48,8 @@
 }
 
 .hospital-cover {
-    background: url(../photos/carefinder1.jpg);
-    /* background-size: contain; */
+    background: url(../photos/background.jpg);
+    background-size: contain;
     background-repeat: no-repeat;
     width: 100%;
     display: grid;
@@ -37,7 +58,7 @@
 
 }
 
-
+/* 
 .hospitals-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -45,10 +66,11 @@
 
     margin-top: 50px;
 
-}
+} */
 
 .hospitals-grid> {
     width: 100%;
+    
 }
 
 .pagination-buttons {
@@ -59,13 +81,21 @@
 
 .pagination-buttons button {
     padding: 10px 20px;
-    background-color: rgb(142, 237, 237);
+    background-color: #441673;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
     margin: 0 5px;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.pagination-buttons button:hover {
+    background-color: #9f9ebb;
+
+
 }
 
 .pagination-buttons button:disabled {
@@ -75,9 +105,9 @@
 
 .hospital_card {
 
-    background-color: gray;
+    background-color: #441673;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 10);
     padding: 1rem;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
@@ -87,15 +117,31 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+    color: #fff;
+   
+
 }
 
 .hospital_card:hover {
     transform: scale(1.02);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #916bb6;
 }
 
+.hospital-card-buttons{
+    width: 60px;
+    margin: 0 auto;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 5px;
 
+}
+
+.loader{
+    color: #441673;
+    font-size: 30px;
+    font-family: cursive;
+}
 
 .search-input {
     padding: 10px 20px;

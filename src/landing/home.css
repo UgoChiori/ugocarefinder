@@ -1,10 +1,11 @@
 .careheader_container {
-   background: url(../photos/background.jpg);
+   background: url(../photos/carefinder1.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
     display: grid;
     place-items: center;
+ 
 }
 
 .careheader_head {
@@ -85,6 +86,11 @@
 
 }
 
+.careheader_select_icon:hover {
+    color: rgb(147, 98, 147);
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
 
 
 .carephoto{
@@ -92,10 +98,13 @@
 position: absolute;
 width: 816px;
 height: 603px;
-right: 624px;
+left: 624px;
 top: 210px;
 filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(12px 12px 20px rgba(14, 61, 183, 0.25));
-border-radius: 50px 0px 0px 50px;
+border-radius: 50px 50px 50px 50px;
+opacity: 0.5;
+
+
 }
 
 @media screen and (max-width:991px) {
@@ -117,6 +126,13 @@ border-radius: 50px 0px 0px 50px;
     .careheader_select_icon{
         font-size: 20px;
     }
-
+  .careheader_container{
+    background:url(../photos/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+  }
 
 }

@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import AuthContextProvider from "./context/AuthContext";
+import { Provider } from "react-redux";
+import  store from "./redux/store";
 
 
 
@@ -15,7 +17,9 @@ root.render(
   <BrowserRouter>
   <AuthContextProvider>
     <React.StrictMode>
+      <Provider store={store}>
       <App />
+      </Provider>
     </React.StrictMode>
     </AuthContextProvider>
   </BrowserRouter>

@@ -139,7 +139,14 @@ const Signin: React.FC<SigninFormProps> = ({ signIn }) => {
               />
               {passwordError && <span className="error">{passwordError}</span>}
             </div>
-            <button className="login-methods" type="submit">
+            <button 
+            onClick={
+              () => {
+                // signIn();
+                navigate("/hospitals");
+              }
+            }
+            className="login-methods" type="submit">
               Login
             </button>
           </form>

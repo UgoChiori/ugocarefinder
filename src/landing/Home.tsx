@@ -17,15 +17,18 @@ const Home: React.FC = () => {
             Search Your <span className="careheader_heading_span">Care</span>{" "}
             Provider
           </h1>
-          {/* add image */}
-          <img src={carefinder1} alt="doctor giving woman injection" className="carephoto"/>
-          <p className="heading_para">Lorem ipsum dolor</p>
+          
           <div className="careheader_input">
             <AiOutlineSearch className="careheader_input_icon" />
             <input
               type="text"
               placeholder="Search"
               className="careheader_input_element"
+              onClick={
+                () => {
+                  navigate ("/signup")
+                }
+              }
             />
           </div>
         </div>
@@ -41,7 +44,11 @@ const Home: React.FC = () => {
           </div>
           <div className="careheader_item">
             <GiDoctorFace className="careheader_select_icon" />
-            <p>Doctor</p>
+            <p onClick={
+              () => { 
+                navigate ("/Doctors")
+              }
+            }>Doctor</p>
           </div>
         </div>
       </div>

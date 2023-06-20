@@ -9,10 +9,11 @@ import { ErrorBoundary } from "react-error-boundary";
 import { AuthContext } from "./context/AuthContext";
 import HospitalDetails from "./hospital/HospitalDetails";
 import HealthTips from "./pages/HealthTips";
-
+// import PrivateRoute from "./utils/PrivateRoute";
 import { auth, signOut, signInWithGoogle } from "./firebase";
 import Navbar from "./navigation/Navbar";
 import Doctors from "./pages/Doctors";
+
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
@@ -61,17 +62,7 @@ function App() {
           <Route path="/signin" element={<Signin signIn={signIn} />} />
           <Route path="/signup" element={<Signup />} />;
           <Route path="/hospitals" element={<Hospitals />} />
-          <Route
-            path="/hospitaldetails"
-            element={
-              <HospitalDetails
-                name={""}
-                status={""}
-                userRatings={""}
-                rating={""}
-              />
-            }
-          />
+          <Route path="/hospitaldetails" element={<HospitalDetails name={""} status={""}  rating={""} />} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/healthtips" element={<HealthTips />} />
         </Routes>
