@@ -4,7 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { GiDoctorFace } from "react-icons/gi";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import carefinder1 from "../photos/carefinder1.jpg";
+// import carefinder1 from "../photos/carefinder1.jpg";
 
 
 const Home: React.FC = () => {

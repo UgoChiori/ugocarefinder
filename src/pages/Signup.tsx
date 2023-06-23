@@ -8,7 +8,7 @@ import {
 import { auth } from "../firebase";
 import "./signup.css";
 import { useNavigate } from "react-router-dom";
-import { Alert } from "react-bootstrap";
+
 
 const RegistrationForm = () => {
   const [name, setName] = useState("");
@@ -16,7 +16,7 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState("");
   const [registered, setRegistered] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -60,7 +60,7 @@ const RegistrationForm = () => {
     <div className="registration-form-wrapper">
       <div className="registration-form">
         <h1>Registration</h1>
-        {error && <Alert variant="danger">{error}</Alert>}
+       {error && {error} }
         {registered ? (
           <div>
             <h1>Welcome, {name || ""}!</h1>

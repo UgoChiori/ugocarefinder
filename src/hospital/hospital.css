@@ -1,7 +1,6 @@
 .container {
     background: url(../photos/background.jpg);
     background-size: cover;
-    /* background-repeat: no-repeat; */
     height: 30vh;
     display: grid;
     place-items: center;
@@ -13,7 +12,7 @@ body{
 }
 
 .carousel{
-    /* width: 100%; */
+  
     max-width: 500px;
     margin: 0 auto;
     height: 100%;
@@ -22,6 +21,12 @@ body{
     align-items: center;
     border-radius: 10px;
     background-color: #441673
+}
+
+.carousel:hover{
+    transform: scale(1.02);
+   
+    background-color: #916bb6;
 }
 
 #careheader_input {
@@ -58,15 +63,7 @@ body{
 
 }
 
-/* 
-.hospitals-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1rem;
 
-    margin-top: 50px;
-
-} */
 
 .hospitals-grid> {
     width: 100%;
@@ -107,7 +104,6 @@ body{
 
     background-color: #441673;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 10);
     padding: 1rem;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
@@ -124,7 +120,7 @@ body{
 
 .hospital_card:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
     background-color: #916bb6;
 }
 
@@ -157,6 +153,7 @@ body{
     box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
 }
 
+
 @media screen and (max-width:991px) {
     .hospitals-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -177,5 +174,9 @@ body{
 
     .search-input {
         width: 100%;
+    }
+    .carousel{
+        max-width: 400px;
+
     }
 }

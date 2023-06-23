@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./landing/Home";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -13,10 +13,12 @@ import HealthTips from "./pages/HealthTips";
 import { auth, signOut, signInWithGoogle } from "./firebase";
 import Navbar from "./navigation/Navbar";
 import Doctors from "./pages/Doctors";
-
+import NotFoundPage from "./components/NotFound";
+import { useState } from "react";
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const [details, setDetails] = useState();
 
   let count = localStorage.getItem("page_views");
   if (count === null) {
@@ -25,6 +27,11 @@ function App() {
     count = (parseInt(count) + 1).toString();
   }
   localStorage.setItem("page_views", count);
+
+  // SET DETAILS
+  const handleDetails = (details: any) => {
+    setDetails(details);
+  };
 
   // Google Signin
   const signIn = () => {
@@ -53,18 +60,55 @@ function App() {
     });
   }, [setCurrentUser]);
 
+  // Protected Route
+  const isAuthenticated = () => {
+    if (currentUser) {
+      return true;
+    }
+    return false;
+  };
+
+  const ProtectedRoute = ({ path, element }: any) => {
+    return isAuthenticated() ? (
+      <Route path={path} element={element} />
+    ) : (
+      <Navigate to="/signup" replace={true} />
+    );
+  };
+
   return (
     <div className="App">
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Navbar signOut={signOutUser} user={currentUser} />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<Signin signIn={signIn} />} />
           <Route path="/signup" element={<Signup />} />;
-          <Route path="/hospitals" element={<Hospitals />} />
-          <Route path="/hospitaldetails" element={<HospitalDetails name={""} status={""}  rating={""} />} />
+          <Route
+            path="/hospitals"
+            element={
+              <ProtectedRoute
+                element={<Hospitals handleDetails={handleDetails} />}
+              />
+            }
+          />
+          <Route
+            path="/hospitaldetails"
+            element={
+              <HospitalDetails
+                name={""}
+                status={""}
+                rating={""}
+                details={details}
+                vicinity={""}
+                opening_hours={false}
+              />
+            }
+          />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/healthtips" element={<HealthTips />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </ErrorBoundary>
     </div>

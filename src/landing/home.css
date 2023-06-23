@@ -5,8 +5,11 @@
     height: 100vh;
     display: grid;
     place-items: center;
+    
  
 }
+
+
 
 .careheader_head {
     text-align: center;

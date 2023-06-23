@@ -3,30 +3,27 @@ import axios from "axios";
 import HospitalCard from "./Card";
 import "./hospital.css";
 import { AiOutlineSearch } from "react-icons/ai";
-import firebase, { auth } from "../firebase";
-// import {auth} from "firebase/app";
 import "firebase/app";
 import { FaWhatsapp, FaEnvelope, FaLink } from "react-icons/fa";
 import MapContainer from "../pages/MapContainer";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const Hospitals: React.FC = () => {
+interface HospitalProps {
+  handleDetails: any;
+}
+const Hospitals: React.FC<HospitalProps> = ({ handleDetails }) => {
   const [testHospitals, setTestHospitals] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [nextTokens, setNextTokens] = useState<any[]>([]);
   const [nextState, setNextState] = useState<boolean>(false);
+
   const [pageUrl] = useState<string[]>([
     "http://localhost:8080/api/maps/place?latitude=6.468137&longitude=3.638487&radius=30000",
     "http://localhost:8080/api/maps/place/next?nextpage=",
   ]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true); // Added loading state
-  // const [radius, setRadius] = useState<number>(30000);
-
-  // const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setRadius(parseInt(e.target.value));
-  // };
 
   // SHARE VIA WHATSAPP
   const handleShare = () => {
@@ -39,24 +36,18 @@ const Hospitals: React.FC = () => {
     window.open(whatsappUrl, "_blank");
   };
 
-  //   const handleShareEmail = () => {
-  //     const hospitalData = testHospitals.map((hospital) => hospital.name).join("\n");
-  //     const shareBody = `Check out these hospitals: \n${hospitalData}`;
+  // SHARE VIA EMAIL
+  const handleShareEmail = () => {
+    const hospitalData = testHospitals
+      .map((hospital) => hospital.name)
+      .join("\n");
+    const shareBody = `Check out these hospitals: \n${hospitalData}`;
 
-  // const user = firebase.auth().currentUser;
-  // if (user) {
-  //   user
-  //     .sendEmailVerification()
-  //     .then(() => {
-  //       alert("Email sent!");
-  //     })
-  //     .catch((error: { message: any }) => {
-  //      console.error("Error sending email verification", error);
-  //     });
-  //   } else {
-  //     alert("You need to be logged in to share via email");
-  // }
-  //   }
+    const emailUrl = `mailto:?subject=${encodeURIComponent(
+      "Check out these hospitals"
+    )}&body=${encodeURIComponent(shareBody)}`;
+    window.open(emailUrl, "_blank");
+  };
 
   // GENERATE SHAREABLE LINK
   const handleGenerateLink = () => {
@@ -65,16 +56,10 @@ const Hospitals: React.FC = () => {
       .join("\n");
     const shareBody = `Check out these hospitals: \n${hospitalData}`;
 
-    const user = auth.currentUser;
-    if (user) {
-      const link = `${window.location.href}?share=${encodeURIComponent(
-        shareBody
-      )}`;
-      navigator.clipboard.writeText(link);
-      alert("Link copied to clipboard");
-    } else {
-      alert("You need to be logged in to generate a shareable link");
-    }
+    const linkUrl = `https://mycarefinder.netlify.app/?subject=${encodeURIComponent(
+      "Check out these hospitals"
+    )}&body=${encodeURIComponent(shareBody)}`;
+    window.open(linkUrl, "_blank");
   };
 
   // SEARCH HOSPITALS
@@ -158,6 +143,7 @@ const Hospitals: React.FC = () => {
           setLoading(false); // Stop loading
         });
     } else if (currentPage > 1) {
+      // eslint-disable-next-line array-callback-return
       nextTokens.map((page) => {
         if (page.page === currentPage) {
           pageToCall = page.token;
@@ -217,32 +203,29 @@ const Hospitals: React.FC = () => {
           <div className="loader">Loading...</div> // Show loading state
         ) : (
           <div className="carousel">
-          <Carousel
-           showStatus={false} 
-           showThumbs={false}
-            infiniteLoop={true}
-            autoPlay={true}
-            interval={5000}
-            transitionTime={1000}
-           >
-          
-            {testHospitals?.map((_hospital: any, index: number) => {
-              // const photoReference = _hospital.photos?.[0]?.photo_reference; // Added a conditional check
-              return (
-                <div key={index}>
-                  <HospitalCard
-                    // key={index}
-                    // photo={photoReference}
-                    name={_hospital.name}
-                    status={_hospital.business_status}
-                    // userRatings={_hospital.user_ratings_total}
-                    rating={_hospital.rating}
-                    // photo_reference={undefined}
-                  />
-                </div>
-              );
-            })}
-          </Carousel>
+            <Carousel
+              showStatus={false}
+              showThumbs={false}
+              infiniteLoop={false}
+              autoPlay={true}
+              interval={5000}
+              transitionTime={1000}
+            >
+              {testHospitals?.map((_hospital: any, index: number) => {
+                return (
+                  <div key={index}>
+                    <HospitalCard
+                      name={_hospital.name}
+                      status={_hospital.business_status}
+                      rating={_hospital.rating}
+                      handleDetails={handleDetails}
+                      details={_hospital}
+                      formatted_address={_hospital.formatted_address}
+                    />
+                  </div>
+                );
+              })}
+            </Carousel>
           </div>
         )}
       </div>
@@ -270,12 +253,12 @@ const Hospitals: React.FC = () => {
             handleShare();
           }}
         />
-        {/* <FaEnvelope
+        <FaEnvelope
           className="share-button"
           onClick={() => {
             handleShareEmail();
           }}
-        /> */}
+        />
         <FaLink
           className="share-button"
           onClick={() => {
