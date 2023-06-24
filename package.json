@@ -71,6 +71,5 @@
   },
   "devDependencies": {
     "@types/react-csv": "^1.1.3"
-   
   }
 }
